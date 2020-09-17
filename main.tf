@@ -29,7 +29,7 @@ resource "tfe_policy_set" "policy" {
   workspace_external_ids = [tfe_workspace.development.external_id]
 
   vcs_repo {
-    identifier         = "mjmenger/f5-sentinel-policies"
+    identifier         = "tewfikm/f5-sentinel-policies"
     branch             = "master"
     ingress_submodules = false
     oauth_token_id     = var.github_oauth_token
