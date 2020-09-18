@@ -22,8 +22,19 @@ resource "tfe_workspace" "development" {
       oauth_token_id     = var.github_oauth_token
   }
 }
-# Policiies removed as they are not part of Terraform Cloud Free Plan
-#
+resource "tfe_policy_set" "policy" {
+  name                   = "my-policy-set-${local.target_branch}"
+  description            = "A brand new policy set"
+  organization           = var.tfc_org
+  workspace_external_ids = [tfe_workspace.development.external_id]
+
+  vcs_repo {
+    identifier         = "tewfikm/f5-sentinel-policies"
+    branch             = "master"
+    ingress_submodules = false
+    oauth_token_id     = var.github_oauth_token
+  }
+}
 #
 # Terraform Cloud Workspace Variables
 #
